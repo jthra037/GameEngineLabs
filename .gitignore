@@ -30,3 +30,24 @@
 *.exe
 *.out
 *.app
+
+# ===================================== #
+# Folders to exclude                    #
+# ===================================== #
+Assets/
+*Temp/
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+*.vs/
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
