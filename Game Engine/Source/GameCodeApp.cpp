@@ -13,6 +13,7 @@ void GameCodeApp::InitInstance()
 	CheckMemory();
 	std::cout << std::endl;
 	std::cout << "CPU Speed: " << ReadCPUSpeed() << std::endl;
+	std::cout << "CPU Architecture: " << ReadCPUArchitecture() << std::endl;
 }
 
 bool GameCodeApp::IsOnlyInstance(LPCTSTR gameTitle)
@@ -29,6 +30,7 @@ bool GameCodeApp::IsOnlyInstance(LPCTSTR gameTitle)
 		//	SetActiveWindow(hWnd);
 		//	return false;
 		//}
+		return false;
 	}
 	return true;
 }
@@ -54,6 +56,7 @@ bool GameCodeApp::CheckStorage(const DWORDLONG diskSpaceNeeded)
 void GameCodeApp::CheckMemory()
 {
 	MEMORYSTATUSEX statex;
+	statex.dwLength = sizeof(statex);
 	GlobalMemoryStatusEx(&statex);
 
 	std::cout << "Free physical memory: " << statex.ullAvailPhys << std::endl;
@@ -115,4 +118,28 @@ DWORD GameCodeApp::ReadCPUSpeed()
 			&BufSize);
 	}
 	return dwMHz;
+}
+
+std::string GameCodeApp::ReadCPUArchitecture()
+{
+	char arch[1024];
+	DWORD BufSize = 1024;
+	DWORD type = REG_SZ;
+	HKEY hKey;
+	// open the key where the proc speed is hidden: 
+	long lError = RegOpenKeyEx(HKEY_LOCAL_MACHINE,
+		"HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0",
+		0,
+		KEY_READ,
+		&hKey);
+	if (lError == ERROR_SUCCESS) {
+		// query the key:  
+		RegQueryValueEx(hKey,
+			"ProcessorNameString",
+			NULL,
+			&type,
+			(LPBYTE)&arch,
+			&BufSize);
+	}
+	return (std::string)arch;
 }

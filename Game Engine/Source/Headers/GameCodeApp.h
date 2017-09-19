@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <direct.h>
 #include <iostream>
+#include <string>
 
 class GameCodeApp
 {
@@ -14,4 +15,5 @@ class GameCodeApp
 		void CheckMemory();
 		bool CheckMemory(const DWORDLONG physicalRAMNeeded, const DWORDLONG virtualRAMNeeded);
 		DWORD ReadCPUSpeed();
+		std::string ReadCPUArchitecture();
 };
