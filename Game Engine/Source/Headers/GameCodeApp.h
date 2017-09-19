@@ -11,6 +11,7 @@ class GameCodeApp
 		void InitInstance();
 		bool IsOnlyInstance(LPCTSTR gameTitle);
 		bool CheckStorage(const DWORDLONG diskSpaceNeeded);
+		void CheckMemory();
 		bool CheckMemory(const DWORDLONG physicalRAMNeeded, const DWORDLONG virtualRAMNeeded);
 		DWORD ReadCPUSpeed();
 };

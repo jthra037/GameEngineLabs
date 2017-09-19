@@ -7,7 +7,12 @@ GameCodeApp::GameCodeApp()
 
 void GameCodeApp::InitInstance()
 {
-
+	std::cout << "Is Only Instance: " << IsOnlyInstance("CryptoNomenclature") << std::endl;
+	std::cout << "More than 300MB space: " << CheckStorage(300) << std::endl;
+	std::cout << "Available memory: ";
+	CheckMemory();
+	std::cout << std::endl;
+	std::cout << "CPU Speed: " << ReadCPUSpeed() << std::endl;
 }
 
 bool GameCodeApp::IsOnlyInstance(LPCTSTR gameTitle)
@@ -15,15 +20,15 @@ bool GameCodeApp::IsOnlyInstance(LPCTSTR gameTitle)
 	HANDLE handle = CreateMutex(NULL, TRUE, gameTitle);
 	if (GetLastError() != ERROR_SUCCESS)
 	{
-		HWND hWnd = FindWindow(gameTitle, NULL);
-		if (hWnd) {
-			// An instance of your game is already running. 
-			ShowWindow(hWnd, SW_SHOWNORMAL);
-			SetFocus(hWnd);
-			SetForegroundWindow(hWnd);
-			SetActiveWindow(hWnd);
-			return false;
-		}
+		//HWND hWnd = FindWindow(gameTitle, NULL);
+		//if (hWnd) {
+		//	// An instance of your game is already running. 
+		//	ShowWindow(hWnd, SW_SHOWNORMAL);
+		//	SetFocus(hWnd);
+		//	SetForegroundWindow(hWnd);
+		//	SetActiveWindow(hWnd);
+		//	return false;
+		//}
 	}
 	return true;
 }
@@ -44,6 +49,15 @@ bool GameCodeApp::CheckStorage(const DWORDLONG diskSpaceNeeded)
 		return false;
 	}
 	return true;
+}
+
+void GameCodeApp::CheckMemory()
+{
+	MEMORYSTATUSEX statex;
+	GlobalMemoryStatusEx(&statex);
+
+	std::cout << "Free physical memory: " << statex.ullAvailPhys << std::endl;
+	std::cout << "Free virtual memory: " << statex.ullAvailVirtual << std::endl;
 }
 
 bool GameCodeApp::CheckMemory(const DWORDLONG physicalRAMNeeded,
@@ -94,7 +108,7 @@ DWORD GameCodeApp::ReadCPUSpeed()
 	if (lError == ERROR_SUCCESS) {
 		// query the key:  
 		RegQueryValueEx(hKey,
-			"MHz",
+			"~MHz",
 			NULL,
 			&type,
 			(LPBYTE)&dwMHz,
