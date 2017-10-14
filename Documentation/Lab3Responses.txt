@@ -1,0 +1,17 @@
+1. Interfaces were created for each type of component that could have similar functionality, but would require specific
+implementation for different instances. The character interface for example would have methods like Increment, Decrement,
+GetCurrent, GetMax etc, but could be implemented differently for each component (Health, Mana, Stamina, Experience). The
+exception is the Transform component, all actors should have a Transform component and no interface is required. Any other
+actor can be built using a variety of interfaces and the components therein.
+
+2. Obstacle avoidance would be included in the Navigation Interface, which encompasses all activity related to 
+pathfinding, navigation meshes, and obstacle avoidance. This allows for variability in how different actors navigate
+the game environment. Flying enemies, ground enemies, and so on will all behave differently in the game. Having an
+interface of base navigation methods would allow for easy implementation of different behaviours.
+
+3. Including a controllable interface allows for a "Controllable Component" to be added to the actor (could be
+a variety of actors not just an enemy). The virtual methods included in this interface could be implemented 
+differently for whichever object it is attached to. For example in a situation where an enemy was to be controlled,
+a controllable component tailored to controlling an enemy with appropriate inputs etc. could be attached. Another
+component tailored to controlling a vehicle could be attached to include inputs for driving mechanics, and so on for
+any other actors the player could control in the game.

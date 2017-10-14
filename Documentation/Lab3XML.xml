@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Actor>
+  <TransformComponent>
+    <Position x="1.385" y="10.214" z="-2.882"/>
+    <Rotation x="3.461" y="355.699" z="204.332"/>
+    <Scale x="7.218" y="7.218" z="5"/>
+	</TransformComponent>
+
+  <MeshFilter>
+    <Mesh shape = "cube"/>
+  </MeshFilter>
+
+  <BoxCollider>
+    <Boolean IsTrigger = "false"/>
+    <PhysicsMaterial Material = ""/>
+    <Center x="0" y="0" z="0"/>
+    <Size x="1" y="1" z="1"/>
+	</BoxCollider>
+
+  <MeshRenderer>
+    <Boolean CastShadows = "true"/>
+    <Boolean ReceiveShadows = "true"/>
+    <List name = "Materials">
+      <int size ="1"/>
+      <Material Element0 ="White"/>
+    </List>
+    <Boolean UseLightProbes ="false"/>
+  </MeshRenderer>
+
+  <Rigidbody>
+    <float Mass ="7.2182"/>
+    <float Drag ="0"/>
+    <float AngularDrag="0"/>
+    <boolean UseGravity="true"/>
+    <boolean IsKinematic="false"/>
+    <enum Interpolate="None"/>
+    <enum CollisionDetection="Continuous"/>
+    <List name="Constraints">
+      
+    </List>
+  </Rigidbody>
+</Actor>
