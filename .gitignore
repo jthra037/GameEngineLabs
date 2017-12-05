@@ -15,6 +15,7 @@ ProjectSettings/ProjectVersion.txt
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
 ExportedObj/
+*storage.ide
 *.svd
 *.userprefs
 *.csproj
