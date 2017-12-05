@@ -7,7 +7,7 @@ public class BaseUI : MonoBehaviour, IScreenElement {
     private float m_Width, m_Height;
     private bool m_bIsVisible;
     private Anchor m_Anchor;
-    protected Resolution currentResolution;
+    protected Vector2 screenSize;
 
     public enum Anchor{
         Top_Left,
@@ -24,7 +24,7 @@ public class BaseUI : MonoBehaviour, IScreenElement {
 
     void Awake()
     {
-        currentResolution = Screen.currentResolution;
+        screenSize = new Vector2(Screen.width, Screen.height);
     }
 
     public BaseUI(){
@@ -126,5 +126,8 @@ public class BaseUI : MonoBehaviour, IScreenElement {
     {
         m_Width *= percentageScale.x;
         m_Height *= percentageScale.y;
+
+        m_PosX *= percentageScale.x;
+        m_PosY *= percentageScale.y;
     }
 }

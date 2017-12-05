@@ -6,6 +6,7 @@ public class ButtonUI : BaseUI {
     public Anchor anchor;
     public Rect shape;
     public bool isVisible;
+    public string text;
     private Rect oldShape;
     private Anchor oldAnchor;
 
@@ -21,13 +22,14 @@ public class ButtonUI : BaseUI {
     private void OnGUI()
     {
         if (VIsVisible()){
-            if (GUI.Button(new Rect(GetPosX(), GetPosY(), GetWidth(), GetHeight()),"")){
+            if (GUI.Button(new Rect(GetPosX(), GetPosY(), GetWidth(), GetHeight()),text)){
                 Debug.Log("Button pressed!");
             }
         }
     }
 
-    void ReDraw(){
+    public void ReDraw()
+    {
         oldAnchor = anchor;
         oldShape = shape;
         SetPosition(shape.x, shape.y);
@@ -46,16 +48,17 @@ public class ButtonUI : BaseUI {
         }
 
         // If screen resolution changes
-        if (Screen.currentResolution.height != currentResolution.height ||
-            Screen.currentResolution.width != currentResolution.width)
+        if (Screen.height != screenSize.y ||
+            Screen.width != screenSize.x)
         {
+            Debug.Log("Resizing");
             // Scale the object to match
-            ScaleObject(new Vector2(Screen.currentResolution.width / currentResolution.width,
-                Screen.currentResolution.height / currentResolution.height));
+            ScaleObject(new Vector2(Screen.width / screenSize.x,
+                Screen.height / screenSize.y));
             // Do that thing
-            ReDraw();
+            //ReDraw();
             // that I like so much
-            currentResolution = Screen.currentResolution;
+            screenSize = new Vector2(Screen.width, Screen.height);
         }
 
         VSetVisible(isVisible);
