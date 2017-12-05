@@ -10,7 +10,7 @@ public class ButtonUI : BaseUI {
     private Anchor oldAnchor;
 
     // Use this for initialization
-	void Start () {
+    void Start () {
         oldAnchor = anchor;
         oldShape = shape;
         SetPosition(shape.x, shape.y);
@@ -43,6 +43,19 @@ public class ButtonUI : BaseUI {
         else{
             oldAnchor = anchor;
             oldShape = shape;
+        }
+
+        // If screen resolution changes
+        if (Screen.currentResolution.height != currentResolution.height ||
+            Screen.currentResolution.width != currentResolution.width)
+        {
+            // Scale the object to match
+            ScaleObject(new Vector2(Screen.currentResolution.width / currentResolution.width,
+                Screen.currentResolution.height / currentResolution.height));
+            // Do that thing
+            ReDraw();
+            // that I like so much
+            currentResolution = Screen.currentResolution;
         }
 
         VSetVisible(isVisible);

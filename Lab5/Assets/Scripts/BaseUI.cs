@@ -7,6 +7,7 @@ public class BaseUI : MonoBehaviour, IScreenElement {
     private float m_Width, m_Height;
     private bool m_bIsVisible;
     private Anchor m_Anchor;
+    protected Resolution currentResolution;
 
     public enum Anchor{
         Top_Left,
@@ -20,6 +21,11 @@ public class BaseUI : MonoBehaviour, IScreenElement {
         Right_Centre
     }
 
+
+    void Awake()
+    {
+        currentResolution = Screen.currentResolution;
+    }
 
     public BaseUI(){
         m_bIsVisible = true;
@@ -58,6 +64,7 @@ public class BaseUI : MonoBehaviour, IScreenElement {
     public void SetAnchor(Anchor anchor){
         m_Anchor = anchor;
 
+        // Dropping anchors
         switch (m_Anchor){
             case Anchor.Top_Left:
                 break;
@@ -113,5 +120,11 @@ public class BaseUI : MonoBehaviour, IScreenElement {
     }
     public void VSetZOrder(float zOrder){
         m_ZOrder = zOrder;
+    }
+
+    public void ScaleObject(Vector2 percentageScale)
+    {
+        m_Width *= percentageScale.x;
+        m_Height *= percentageScale.y;
     }
 }
