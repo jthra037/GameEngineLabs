@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseUI : MonoBehaviour, IScreenElement {
-    private float m_PosX, m_PosY, m_ZOrder;
+    protected float m_PosX, m_PosY, m_ZOrder;
     private float m_Width, m_Height;
     private bool m_bIsVisible;
     private Anchor m_Anchor;
@@ -60,35 +60,37 @@ public class BaseUI : MonoBehaviour, IScreenElement {
 
         switch (m_Anchor){
             case Anchor.Top_Left:
-                // ...
                 break;
 
             case Anchor.Top_Right:
-                m_PosX = m_PosX-m_Width;
+                m_PosX = m_PosX - m_Width;
                 break;
 
             case Anchor.Top_Centre:
-                // ...
+                m_PosX = m_PosX - (m_Width / 2);
                 break;
 
             case Anchor.Bottom_Left:
-                m_PosY = m_PosY-m_Height;
+                m_PosY = m_PosY - m_Height;
                 break;
 
             case Anchor.Bottom_Right:
-                //...
+                m_PosY = m_PosY - m_Height;
+                m_PosX = m_PosX - m_Width;
                 break;
 
             case Anchor.Bottom_Centre:
-                //...
+                m_PosY = m_PosY - m_Height;
+                m_PosX = m_PosX - (m_Width / 2);
                 break;
 
             case Anchor.Left_Centre:
-                //...
+                m_PosY = m_PosY - (m_Height / 2);
                 break;
 
             case Anchor.Right_Centre:
-                //...
+                m_PosY = m_PosY - (m_Height / 2);
+                m_PosX = m_PosX - m_Width;
                 break;
 
             case Anchor.Centre:
